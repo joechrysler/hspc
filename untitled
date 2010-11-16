@@ -1,0 +1,36 @@
+
+class FAQ
+  include DataMapper::Resource
+
+  property :id,         Serial
+  property :posted_by,  String
+  property :email,      String
+  property :url,        String
+  property :body,       Text
+end
+
+class Participant
+  include DataMapper::Resource
+
+  property :id,         Serial
+  property :name,       String
+end
+
+class Problem
+  include DataMapper::Resource
+end
+
+class Problem_Set
+  include DataMapper::Resource
+  
+end
+
+class School
+  include DataMapper::Resource
+  
+end
+
+class Team
+  include DataMapper::Resource
+  
+end
