@@ -88,7 +88,7 @@ end
 #DataMapper.auto_upgrade!
 
 get '/' do
-	haml :index
+  haml :index
 end
 
 get '/about' do
@@ -101,12 +101,12 @@ end
 
 #stylesheets
 get '/style.css' do
-  #header 'Content-Type' => 'text/css; charset=utf-8'
+  content_type 'text/css', :charset => 'utf-8'
   sass :'sass/style'
 end
 
 get '/handheld.css' do
-  #header 'Content-Type' => 'text/css; charset=utf-8'
+  content_type 'text/css', :charset => 'utf-8'
   sass :'sass/handheld'
 end
 
