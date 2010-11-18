@@ -1,0 +1,22 @@
+Routes Necessary
+----------------
+Add Team
+List Registered Teams
+List of Schols
+  - Addresses
+	- Contact Person
+List of Problems in the Database
+Add problems 
+HSPC Overview
+Rules & Guidelines
+Sample Problems
+  - Select problem from DB not for current competition.
+FAQ
+Student Registration
+  - password
+	- phone number
+	- shirt size
+	- email
+	- address
+	- name
+	- team id
