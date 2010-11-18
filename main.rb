@@ -18,7 +18,7 @@ class Competition
   property :duration,             Integer
   property :location,             String
   
-  has 1, :problem_sets,           Integer
+  #has 1, :problem_sets,           Integer
 end
 
 class FAQ
@@ -42,7 +42,7 @@ class Participant
   property :phone,                String,   :length => 13
   property :password,             String,   :length => 32
   
-  belongs_to :team
+  #belongs_to :team
 end
 
 class Problem
@@ -53,7 +53,7 @@ class Problem
   property :input,                Text
   property :output,               Text
   
-  belongs_to :problem_sets
+  #belongs_to :problem_sets
 end
 
 class Problem_Set
@@ -85,24 +85,28 @@ class Team
   property :type,                Enum[:school, :test]
 end
 
-DataMapper.auto_upgrade!
+#DataMapper.auto_upgrade!
 
 get '/' do
-	haml :index
+  haml :index
 end
 
 get '/about' do
   haml :about
 end
 
+get '/addteam' do
+  haml :addteam
+end
+
 #stylesheets
 get '/style.css' do
-  #header 'Content-Type' => 'text/css; charset=utf-8'
+  content_type 'text/css', :charset => 'utf-8'
   sass :'sass/style'
 end
 
 get '/handheld.css' do
-  #header 'Content-Type' => 'text/css; charset=utf-8'
+  content_type 'text/css', :charset => 'utf-8'
   sass :'sass/handheld'
 end
 
