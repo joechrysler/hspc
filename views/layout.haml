@@ -19,12 +19,12 @@
 	%link{:href => "/favicon.ico", :rel => "shortcut icon"}/
 	%link{:href => "/apple-touch-icon.png", :rel => "apple-touch-icon"}/
 	/ CSS : implied media="all"
-	%link{:href => "style.css?v=1", :rel => "stylesheet", :type => "text/css"}/
+	%link{:href => "/style.css?v=1", :rel => "stylesheet", :type => "text/css"}/
 	/ Uncomment if you are specifically targeting less enabled mobile browsers
 	/
 		%link{:href => "handheld.css?v=1", :media => "handheld", :rel => "stylesheet", :type => "text/css"}/
 	/ All JavaScript at the bottom, except for Modernizr which enables HTML5 elements &amp; feature detects
-	%script{:src => "js/modernizr-1.5.min.js"}
+	%script{:src => "/js/modernizr-1.5.min.js"}
 / paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
 %body
 	#container
@@ -38,18 +38,18 @@
 	/ Grab Google CDN's jQuery. fall back to local if necessary
 	%script{:src => "//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"}
 	:javascript
-		!window.jQuery && document.write(unescape('%3Cscript src="js/jquery-1.4.2.min.js"%3E%3C/script%3E'))
-	%script{:src => "js/plugins.js?v=1"}
-	%script{:src => "js/script.js?v=1"}
+		!window.jQuery && document.write(unescape('%3Cscript src="/js/jquery-1.4.2.min.js"%3E%3C/script%3E'))
+	%script{:src => "/js/plugins.js?v=1"}
+	%script{:src => "/js/script.js?v=1"}
 	/[if lt IE 7 ]
-		<script src="js/dd_belatedpng.js"></script>
+		<script src="/js/dd_belatedpng.js"></script>
 		<script>
 		\  //fix those png IMGs and .png_bg background-images
 		\  DD_belatedPNG.fix('img, .png_bg');
 		</script>
 	/ yui profiler and profileviewer - remove for production
-	%script{:src => "js/profiling/yahoo-profiling.min.js?"}
-	%script{:src => "js/profiling/config.js?v=1"}
+	%script{:src => "/js/profiling/yahoo-profiling.min.js?"}
+	%script{:src => "/js/profiling/config.js?v=1"}
 	/ end profiling code
 	/
 		asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet
