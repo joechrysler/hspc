@@ -113,7 +113,7 @@ end
 
 DataMapper.finalize
 #warning, auto_migrate will drop all the current tables from the DB
-#DataMapper.auto_migrate!
+DataMapper.auto_migrate!
 
 get '/' do
   haml :index
