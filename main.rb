@@ -5,7 +5,7 @@ require 'haml'
 require 'dm-core'
 require 'dm-types'
 require 'dm-migrations'
-require '/Library/Ruby/Gems/1.8/gems/prawn-0.8.4/lib/prawn.rb'
+require 'prawn'
 
 # A MySQL connection:
 DataMapper.setup(:default, 'mysql://hspc:bidgoli123@localhost/hspc')
