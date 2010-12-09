@@ -5,6 +5,8 @@ require 'haml'
 require 'dm-core'
 require 'dm-types'
 require 'dm-migrations'
+require '/Library/Ruby/Gems/1.8/gems/prawn-0.8.4/lib/prawn.rb'
+
 # A MySQL connection:
 DataMapper.setup(:default, 'mysql://hspc:bidgoli123@localhost/hspc')
 
@@ -21,10 +23,13 @@ class Competition
   include DataMapper::Resource
   property :id,                   Serial
   property :name,                 String,   :length => 35
-  property :date,                 DateTime
+  property :date,                 Date
+  property :deadline,             Date
   property :type,                 Enum[:test, :school]
   property :duration,             Integer
   property :location,             String
+  property :chair,                String
+  property :chair_email,          String
 end
 
 class ProblemSet
@@ -119,6 +124,41 @@ get '/about' do
 end
 
 get '/addteam' do
+  haml :addteam
+end
+
+get '/competition/:compid' do 
+  competition = Competition.get(params[:compid])
+
+  @name = competition.name
+  @location = competition.location
+  @date = competition.date
+  @deadline = competition.deadline
+  @duration = competition.duration
+  @chair = competition.chair
+  @chair_email = competition.chair_email
+  haml :competition_overview
+end
+
+get '/competition/:compid/invite' do 
+  competition = Competition.get(params[:compid])
+  
+  Prawn::Document.generate("invites.pdf") do
+    text "generated at: "
+    text Time.now.inspect
+    schools = School.all
+    schools.each do |school|
+      start_new_page
+      bounding_box [25,675], :width => 400 do
+        text "Attention: Advisor or Computer Science Instructor"
+        text school.name
+        text school.address
+        text school.address2
+      end
+      text "To whom it May Concern,\n\n\The Association for Computing Machinery(ACM) at Saginaw Valley State University will be conducting the High School Programming Competition on #{competition.date}. This contest has been an annual event hosted by the ACM student chapter at SVSU for over two decades. We are extended an invitation to your high school to attend this year's competition.\n\nThis year we hope to expand our competition to more Michigan schools. Even if your school does not have any computer programming classes, you may be surprised to find out that some of your students can indeed program. We ask that you post our flyer in any of your computer classes or mathematics classes. Hopefully, this may spark sme interest in your school's young programmers to come out and show nt only us, but other local students what they can do. Teams consist of up to three students. Multiple teams from each school are encouraged. T-shirts, continental breakfast, and lunch are included for free. Plaques are given to the top contenders, as are assorted prizes donated by local businesses.\n\nThis year the programming contest will support Gnu C++, Java, and Python. All programs are expected to be command line programs, read stdin for the input and output to stdout. Contest rules can be found on the competition's website (http://acm.svsu.edu/hspc). Registration begins immediately via our online registration using your school's id number listed below. Registration must be received by #{competition.deadline}\n\nSchool ID: #{school.code}\n\nThank you for your time and we hope to see your school at the upcoming programming contest. If you have any questions, please email me, #{competition.chair}, at #{competition.chair_email}. \n\nSincerely yours, \n\n#{competition.chair}\nHigh School Programming Competition Chairperson\nAssociation for Computing Machinery at SVSU"
+      #puts school.name
+    end
+  end
   haml :addteam
 end
 
